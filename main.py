@@ -20,8 +20,7 @@ def run(elements, element):
     return count
 
 
-# Generate Xs
-# Type 1 is represented by 1, Type 2 is represented by 2
+
 def generate_X(F, H):
     N = F + H
     output = [None] * N
@@ -37,21 +36,18 @@ def generate_X(F, H):
         if not j:output[i] = 2
     return output
 
-#
-# test = generate_X(5,7)
-# print(test, test.count(1), test.count(2))
 
-#
+
+# generate Xs
 def generate_Xs(n, f, h):
     arr = [generate_X(f, h) for y in range(n)]
     Xs = [None] * n
     for i in range(n):
-        #Xs[i] = len(arr[i])
         Xs[i] = run(arr[i], 1)
     return Xs
-#
-#
-# # Write an array into an excel sheet
+
+
+# Write an array into an excel sheet
 def add_to_excel(arrays):
     workbook = xlsxwriter.Workbook('arrays.xlsx')
     worksheet = workbook.add_worksheet()
@@ -66,9 +62,9 @@ def add_to_excel(arrays):
 # Calculate Mean
 def mean(array):
     return sum([x for x in array]) / len(array)
-#
-#
-# # Calculate Standard Deviation
+
+
+# Calculate Standard Deviation
 def standard_Deviation(array):
     total = sum(((x - mean(array)) ** 2 for x in array))
     variance = total / len(array)
@@ -89,7 +85,8 @@ def kurtosis(array):
     x = sum(((x - mean(array)) ** 4 for x in array)) / len(array)
     kurtosis = x / (standard_Deviation(array) ** 4)
     return kurtosis
-#
+
+# textbook formulas
 def formula_skew(f,h):
     num = ((f*(h+1))/(f+h))*((f**2*(h+1)**2-f*(4*h+3)+(h+2))/((f+h-2)*(f+h-1)))-3*((f**2*(f-1)*h*(h+1)**2)/((f+h)**3*(f+h-1)))-((f*(h+1))/(f+h))**3
     denum = ((f*(f-1)*h*(h+1))/((f+h)**2*(f+h-1)))**(3/2)
@@ -107,15 +104,15 @@ def formula_kur(f,h):
     return ku
 
 
-# # Question 6
+# User imputs for simulation
 f = int(input('Please Enter F '))
 h = int(input('Please Enter h '))
 
 array = generate_Xs(10000, f, h)
-#print(array)
-#
+
+
 #add_to_excel(array)
-#
+
 # skew1 = skewness(array)
 # skew2 = formula_skew(f,h)
 # kur1 = kurtosis(array)
@@ -135,8 +132,6 @@ def relativeError(measured, actual):
 
 print()
 # print('Error of Skewness based on array of length 10000 ' + ' is: ' + str(relativeError(skew1, skew2)) + ' %')
-#
-# print()
 # print('Error of Kurtosis based on array of length 10000 ' + ' is: ' + str(relativeError(kur1, kur2)) + ' %')
 
 thirty_runs = [None]*30
